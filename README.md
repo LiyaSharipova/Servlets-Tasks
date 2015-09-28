@@ -1,0 +1,2 @@
+# ThirdTerm
+Repository for stydying
