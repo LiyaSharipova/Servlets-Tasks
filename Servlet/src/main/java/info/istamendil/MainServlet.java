@@ -52,8 +52,7 @@ public class MainServlet extends HttpServlet {
                 "</head>\n" +
                 "<body>\n" +
                 "<form action=\"\"form method=\"POST\">\n" +
-                "    <p>Email:<br><input type=\"email\" name=\"email\"></p>\n" +
-                "\n" +
+                "    <p>Email:<br><input type=\"email\" name=\"email\"></p>\n"+
                 "    <p>Password:<br><input type=\"password\" name=\"password\" value=\"\"></p>\n" +
                 "Gennder: </br>\n" +
 

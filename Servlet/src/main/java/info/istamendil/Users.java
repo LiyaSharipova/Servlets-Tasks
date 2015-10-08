@@ -19,13 +19,13 @@ public class Users extends HttpServlet {
 
 
     }
-    private ArrayList<String> getData() {
-        ArrayList<String> database = new ArrayList<>();
+    private ArrayList<String[]> getData() {
+        ArrayList<String[]> database = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new MainServlet().db)));
             String s;
             while ((s = reader.readLine()) != null) {
-               database.add(s);
+               database.add(s.split(" "));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -39,21 +39,25 @@ public class Users extends HttpServlet {
         sb.append("<html>");
         sb.append("<head><meta charset=\"utf-8\"/>");
         sb.append("<title>users</title>");
-        sb.append("<style>table{float: left; marging:20px  }</style >");
+        sb.append("<style>body{ background-color: #7babac; }\n" +
+                        "      .block{\n" +
+                        "          text-align: center; border: solid 2px #34bc85;\n" +
+                        "          padding: 15px;height: 150px;\n" +
+                        "          width: 300px ; background: gainsboro;\n" +
+                        "          font-family: sans-serif; font-weight: 200; font-size: 20px; \n" +
+                        "          color: #ec8f01; margin:20px;float: left}"+
+                "</style >");
         sb.append("</head");
+
         sb.append("<body>");
-        ArrayList<String> db = getData();
-        for (int i = 0; i < db.size(); i ++) {
-            String[] data= db.get(i).split(" ");
-            sb.append("<table width:\"150px\">");
-            sb.append("<col width=\"50\" valign=\"top\">\n" +
-                    "   <col width=\"250\" valign=\"top\">");
-            sb.append("<tr><td>Email</td><td>"+data[0]+ "</td> </tr>");
-            sb.append("<tr><td>Password</td><td>" + data[1].replace('&', ' ')+"</td></tr>");
+        ArrayList<String[]> db = getData();
+        for (String[] data: db){
+            sb.append("<div class=\"block\">"+data[0]+"</br>");
+            sb.append(data[1].replace('&', ' ')+"</br>");
             if (data[2]=="1") data[2]="male";
             else data[2]="female";
-            sb.append("<tr><td>Gender: </td><td>"+ data[2]+"</td></tr>");
-            sb.append("<tr><td>Subscription: </td><td>"+ data[3]+"</td></tr></table>");
+            sb.append(data[2]+"</br>");
+            sb.append(data[3]+"</div>");
         }
         sb.append("</body>");
         sb.append("</html>");
