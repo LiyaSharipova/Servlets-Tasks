@@ -14,13 +14,13 @@
         <url-pattern>/Regform</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>Users</servlet-name>
-        <servlet-class>ru.kpfu.itis.sharipova.servlets.AllUsersServlet</servlet-class>
+        <servlet-name>UsersServlet</servlet-name>
+        <servlet-class>ru.kpfu.itis.sharipova.servlets.UsersServlet</servlet-class>
     </servlet>
 
 
     <servlet-mapping>
-        <servlet-name>Users</servlet-name>
+        <servlet-name>UsersServlet</servlet-name>
         <url-pattern>/users</url-pattern>
     </servlet-mapping>
 
