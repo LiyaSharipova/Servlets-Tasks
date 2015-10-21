@@ -3,36 +3,15 @@
 <html>
 <head>
     <title>Registration</title>
-    <script>
-        function formCheck() {
-
-            var email = document.getElementById("email");
-            var reg = /^((?:\w+(?:\-|\.)?)+)@((?:\w{2,}\.)+\w{2,6})$/;
-            if (!reg.test(email)) {
-                alert("Invalid Email")
-            }
-
-            var pass = document.getElementById("pass");
-            if (pass.length < 6) {
-                alert("Password is too short");
-            }
-
-            document.getElementById('symbols').innerHTML = s.length;
-            var radio = document.getElementsByName("gender");
-            if (!radio[0].checked && !radio[1].checked) {
-                alert("Choose gender")
-            }
-        }
-    </script>
 </head>
 <body>
 <c:if test="${not empty message}">
     <h3>${message}</h3>
 </c:if>
-<form action="" form method="POST" onsubmit="formCheck()">
-    <p id="email">Email:<br><input type="text" name="email"></p>
+<form action="" name="regForm" form method="POST" onsubmit="return formCheck()">
+    <p >Email:<br><input type="text" name="email"></p>
 
-    <p id="pass">Password:<br><input type="password" name="password"></p>
+    <p>Password:<br><input type="password" name="password"></p>
 
     <input type="radio" name="gender" value="1">Male</br>
     <input type="radio" name="gender" value="0">Female </br>
@@ -47,5 +26,6 @@
     <p><input type="submit" value="Registrate">
 
 </form>
+<script type="text/javascript" src="js/check.js"></script>
 </body>
 </html>
