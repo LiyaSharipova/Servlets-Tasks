@@ -11,8 +11,8 @@ public class User {
     private  String subscribe;
     private String aboutMe;
     private String salt;
+    private String rememberMe;
 
-    public User(){};
     public User(int id, String email, String password, String gender, String subscribe,
                 String aboutMe, String salt) {
         this.id=id;
@@ -23,6 +23,11 @@ public class User {
         this.aboutMe=aboutMe;
         this.salt=salt;
     }
+    public User(int id, String email, String password, String gender, String subscribe,
+                String aboutMe, String salt, String rememberMe){
+        this(id, email, password, gender, subscribe, aboutMe, salt);
+        this.rememberMe=rememberMe;
+    }
     public User(String email, String password, String gender, String subscribe, String aboutMe) {
         this.email = email;
         this.password = password;
@@ -30,7 +35,6 @@ public class User {
         this.subscribe = subscribe;
         this.aboutMe=aboutMe;
     }
-
     public String getAboutMe() {
         return aboutMe;
     }
@@ -46,10 +50,10 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }
@@ -77,10 +81,18 @@ public class User {
     public String getSubscribe() {
         return subscribe;
     }
+
     public String getSalt() {
         return salt;
     }
     public void setSalt(String salt) {
         this.salt = salt;
+    }
+    public String getRememberMe() {
+        return rememberMe;
+    }
+
+    public void setRememberMe(String rememberMe) {
+        this.rememberMe = rememberMe;
     }
 }

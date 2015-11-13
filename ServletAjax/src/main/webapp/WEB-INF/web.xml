@@ -88,6 +88,15 @@
         <url-pattern>/ajaxtest</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>welcome</servlet-name>
+        <servlet-class>ru.kpfu.itis.sharipova.servlets.WelcomeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>welcome</servlet-name>
+        <url-pattern>/welcome</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>ajaxtestXml</servlet-name>
         <servlet-class>ru.kpfu.itis.sharipova.servlets.AjaxTestServletWithXml</servlet-class>
     </servlet>

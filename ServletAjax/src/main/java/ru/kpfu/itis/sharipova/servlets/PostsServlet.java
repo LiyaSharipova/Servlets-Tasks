@@ -24,17 +24,19 @@ public class PostsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session= req.getSession();
         User user = (User) session.getAttribute("user");
-        if(user==null) resp.sendRedirect("/login");
         List<Post> posts = new ArrayList<>();
         try {
             posts = PostRepository.getAllPosts();
 
         } catch (SQLException e) {
-            req.setAttribute("message","Sorry, some problems with server(");
+            req.setAttribute("message", "Sorry, some problems with server(");
             e.printStackTrace();
         }
         req.setAttribute("posts", posts);
-        req.getServletContext().getRequestDispatcher("/WEB-INF/views/posts.jsp").forward(req,resp);
+        if(user==null) req.getServletContext().getRequestDispatcher("/WEB-INF/views/posts1.jsp").forward(req, resp);
+        else {
+            req.getServletContext().getRequestDispatcher("/WEB-INF/views/posts.jsp").forward(req, resp);
+        }
     }
 
     @Override

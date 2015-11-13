@@ -10,14 +10,17 @@ import java.util.regex.Pattern;
 
 import ru.kpfu.itis.sharipova.utils.*;
 
+import javax.servlet.http.Cookie;
+
 /**
  * Created by Baths on 12.10.2015.
  */
 public class UserRepository {
 
-    public static User identifyUser(String email, String password) throws IdentityException, SQLException {
+    public static User identifyUser(String email, String password)
+            throws IdentityException, SQLException {
         Connection conn = MysqlConnect.getDbCon().conn;
-        PreparedStatement p = conn.prepareStatement("SELECT * FROM users WHERE (email=?)");
+        PreparedStatement p = conn.prepareStatement("SELECT * FROM users WHERE (email=?);");
         p.setString(1, email);
         ResultSet set = p.executeQuery();
         if (!set.next())
@@ -29,10 +32,43 @@ public class UserRepository {
         String entrySubs = set.getString("subscribe");
         String entryAbout = set.getString("aboutMe");
         String entrySalt = set.getString("salt");
+
         if (!SecurityService.validate(password, entryPass, entrySalt))
             throw new IdentityException("Wrong email or password");
         return new User(entryId, entryEmail, entryPass, entryGender, entrySubs, entryAbout, entrySalt);
 
+    }
+    public static void updateCookie(User user, Cookie cookie) throws SQLException {
+        Connection conn = MysqlConnect.getDbCon().conn;
+        PreparedStatement p = conn.prepareStatement("UPDATE users SET rememberMe=? WHERE(id=?);");
+        p.setString(1, cookie.getValue());
+        p.setInt(2, user.getId());
+        p.executeUpdate();
+    }
+    public static User getUserByCookie(Cookie cookie) throws SQLException {
+        Connection conn = MysqlConnect.getDbCon().conn;
+        PreparedStatement p = conn.prepareStatement("SELECT * FROM users WHERE (rememberMe=?);");
+        p.setString(1, cookie.getValue());
+        ResultSet set = p.executeQuery();
+        if (!set.next())
+            return null;
+        int entryId = set.getInt("id");
+        String entryEmail = set.getString("email");
+        String entryPass = set.getString("password");
+        String entryGender = set.getString("gender");
+        String entrySubs = set.getString("subscribe");
+        String entryAbout = set.getString("aboutMe");
+        String entrySalt = set.getString("salt");
+        String entryRem=set.getString("rememberMe");
+        return  new User(entryId, entryEmail, entryPass, entryGender, entrySubs, entryAbout, entrySalt, entryRem);
+
+    }
+
+    public  static void deleteCookie(User user) throws SQLException {
+        Connection conn = MysqlConnect.getDbCon().conn;
+        PreparedStatement p = conn.prepareStatement("UPDATE users SET rememberMe=NULL WHERE(id=?);");
+        p.setInt(1,user.getId());
+        p.executeUpdate();
     }
 
     public static User getUserById(int id) throws SQLException {
@@ -40,7 +76,6 @@ public class UserRepository {
         String s = "select * from users where `id` =" +id +";";
         PreparedStatement ps = conn.prepareStatement(s);
 //        ps.setInt(1, id);
-
         ResultSet set = ps.executeQuery();
 
         if (set.next()){
@@ -66,7 +101,7 @@ public class UserRepository {
                 "aboutMe, salt)")
                 .append(" values (?,?,?,?,?,?);");
         Connection conn = MysqlConnect.getDbCon().conn;
-        String salt = SecurityService.getSalt();
+        String salt = SecurityService.getRand();
         String heshedPas = SecurityService.getHesh(user.getPassword(), salt);
         try {
             PreparedStatement p = conn.prepareStatement(sqlQuery.toString());
@@ -100,5 +135,4 @@ public class UserRepository {
     protected String datacheck(String str) {
         return str.replace(' ', '$');
     }
-
 }

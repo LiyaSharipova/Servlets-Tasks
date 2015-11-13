@@ -1,24 +1,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
-<%--
-  Created by IntelliJ IDEA.
-  User: Baths
-  Date: 10.11.2015
-  Time: 21:12
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <title>Blog</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"
+          type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+          type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
     <script>
         $(document).ready(function () {
-            $('#exitButton').on('click', function() {
+            $('#exitButton').on('click', function () {
                 location.href = '<c:url value="/logout"/>';
             });
-            $('#profileButton').on('click', function() {
+            $('#profileButton').on('click', function () {
                 location.href = '<c:url value="/profile"/>';
             });
             $('#myButton').click(function (e) {
@@ -32,13 +38,13 @@
                             $('#myButton').text("send").attr("disabled", false);
                             $('textarea#text').val('');
                             $('#postPlace').append(
-                                    "<div style='float: left; margin: 20px' >" +
-                                    "<p>" + response.userName + "</p>" +
-                                    "<p>" + response.postText + "</p>" +
-
-                                    "Published time : " +
-                                    "<p>" + response.pTime + "</p>" +
-                                    "</div>"
+                                    "<div class=\"post-preview\">"+
+                                        "<h3 class=\"post-subtitle\">"+
+                                         response.postText+
+                                        "</h3>"+
+                                        "<p class=\"post-meta\">Posted by <b>"+response.userName+"</b> on"+response.pTime+"</p>"+
+                                    "</div>"+
+                                    "<hr>"
                             )
 
                         },
@@ -55,24 +61,70 @@
 
 </head>
 <body>
-<div id="postPlace">
-    <c:forEach items="${posts}" var="p">
-        <div style='float: left; margin: 20px'>
-            <c:out value="${p.getUserName()}"/>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header ">
+            <a class="navbar-brand" href="<c:url value="/welcome"/>">MYPROJECT</a>
+        </div>
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a href="<c:url value="/welcome"/>">Home</a></li>
+                <li><a href="<c:url value="/profile"/>">Profile</a></li>
+                <li class="active"><a href="<c:url value="/posts"/>">Posts</a></li>
+
+                <form id="exit" action="<c:url value="/logout"/>" method="post" style="display:none;">
+                </form>
+                <li>
+                    <a onclick='document.getElementById("exit").submit();'>Exit</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
 
 
-            <p><c:out value="${p.getText()}"/></p>
+<header class="intro-header" style="background-image: url('/images/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>Great Blog</h1>
+                    <hr class="small">
+                    <span class="subheading">See other peoples thoughts</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
+<!-- Main Content -->
+<div class="container">
 
-            <p>Published time :<br> <c:out value="${p.getPublishedTime()}"/></p>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div id="postPlace">
+                <c:forEach items="${posts}" var="p">
+                    <div class="post-preview">
+                        <h3 class="post-subtitle">
+                                ${p.getText()}
+                        </h3>
+
+                        <p class="post-meta">Posted by <b>${p.getUserName()}</b> on ${p.getPublishedTime()}</p>
+                    </div>
+                    <hr>
+                </c:forEach>
+                </div>
+                <div >
+                    <textarea rows="5" class="form-control" id="textPost" placeholder="Add your post "></textarea>
+                </div>
+                <button id="myButton" type="submit" class="btn btn-default">Send</button>
+
+            </div>
 
         </div>
-    </c:forEach>
+
 
 </div>
-<textarea rows="5" cols="25" id="text" placeholder="Введите текст "></textarea>
-<button id="myButton">Send</button>
-<button id="profileButton" class="float-left submit-button">Profile</button>
-<button id="exitButton" class="float-left submit-button">Log out</button>
 </body>
 </html>

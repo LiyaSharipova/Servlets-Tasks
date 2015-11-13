@@ -45,10 +45,11 @@ public class SecurityService {
         return hash.equals(currentHash);
     }
 
-    public static String getSalt() {
+    public static String getRand() {
         byte[] salt = new byte[16];
         SecureRandom random = new SecureRandom();
         random.nextBytes(salt);
         return Hex.encodeHexString(salt);
     }
+
 }

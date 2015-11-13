@@ -1,14 +1,13 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Baths
-  Date: 05.11.2015
-  Time: 2:40
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title></title>
+    <title>thenewboston</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         function loadXMLDoc() {
             var xmlhttp;
@@ -36,12 +35,22 @@
     </script>
 </head>
 <body>
-<button type="button" onclick="loadXMLDoc()">
-    Get secret info from Server
-</button>
-<p>Secret info is:
+<div class="container-fluid">
+    <button type="button" onclick="loadXMLDoc()">
+        Get secret info from Server
+    </button>
+    <p>Secret info is:
 
-<div id="myDiv"></div>
-</p>
+    <div id="myDiv"></div>
+    </p>
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe class="embed-responsive-item" src="http://www.youtube.com/embed/ClHu3XQBnGU&list=PL6gx4Cwl9DGBPw1sFodruZUPheWVKchlM&index=4"
+    </div>
+    <%--<div class="row">--%>
+        <%--<div class="col-md-8" style="background-color: #34bc85">left</div>--%>
+        <%--<div class="col-md-2" style="background-color: aliceblue">mid</div>--%>
+        <%--<div class="col-md-2" style="background-color: aqua">right</div>--%>
+    <%--</div>--%>
+</div>
 </body>
 </html>
