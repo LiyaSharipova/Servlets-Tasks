@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="SQL Server - relAlg@localhost" uuid="bf27ef19-e130-4483-aa49-3938d7ada1ee">
+      <secret-storage>memory</secret-storage>
+      <domain-auth>true</domain-auth>
+      <first-sync>true</first-sync>
+    </data-source>
+  </component>
+</project>

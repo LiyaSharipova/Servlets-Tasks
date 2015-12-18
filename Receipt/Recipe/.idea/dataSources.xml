@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3619751920">
+    <data-source source="LOCAL" name="SQL Server - relAlg@localhost" uuid="bf27ef19-e130-4483-aa49-3938d7ada1ee">
+      <driver-ref>sqlserver.ms</driver-ref>
+      <jdbc-driver>com.microsoft.sqlserver.jdbc.SQLServerDriver</jdbc-driver>
+      <jdbc-url>jdbc:sqlserver://localhost:1433;databaseName=relAlg</jdbc-url>
+      <vm-options>-Djava.library.path=&quot;C:\Program Files\Microsoft JDBC Driver 4.2 for SQL Server\sqljdbc_4.2\enu\auth\x64&quot;</vm-options>
+      <libraries>
+        <library>
+          <url>file://C:/Program Files/Microsoft JDBC Driver 4.2 for SQL Server/sqljdbc_4.2/enu/sqljdbc42.jar</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
+</project>
